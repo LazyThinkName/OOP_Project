@@ -283,4 +283,148 @@ public class ItemManager{
         }
         return drink;
     }
+    
+    public ArrayList<Food> searchFood(String search, int searchBy)throws ClassNotFoundException{
+        ArrayList<Food> result=new ArrayList<>();
+        ArrayList<Food> list;
+        list=readAllFood();
+        
+        switch (searchBy) {
+            case 0:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Food".equals(list.get(i).getItemType()) &&(list.get(i).getItemID() == null ? search == null : list.get(i).getItemID().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            case 1:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Food".equals(list.get(i).getItemType()) &&(list.get(i).getItemName() == null ? search == null : list.get(i).getItemName().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            case 2:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Food".equals(list.get(i).getItemType()) &&(list.get(i).getArrivalDate() == null ? search == null : list.get(i).getArrivalDate().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            case 3:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Food".equals(list.get(i).getItemType()) && (list.get(i).getExpireDate() == null ? search == null : list.get(i).getExpireDate().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            default:
+                break;
+        }
+        return result;
+    }
+    
+    public ArrayList<Food> searchFood(double max, double min)throws ClassNotFoundException{
+        ArrayList<Food> result=new ArrayList<>();
+        ArrayList<Food> list;
+        list=readAllFood();
+        for (int i=0;i<list.size();i++)
+        {
+            if ("Food".equals(list.get(i).getItemType()) && (list.get(i).getItemPrice() >= min && list.get(i).getItemPrice() <= max))
+            {
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
+    
+    public ArrayList<Food> searchFood(int max, int min)throws ClassNotFoundException{
+        ArrayList<Food> result=new ArrayList<>();
+        ArrayList<Food> list;
+        list=readAllFood();
+        for (int i=0;i<list.size();i++)
+        {
+            if ("Food".equals(list.get(i).getItemType()) && (list.get(i).getItemQuantity() >= min && list.get(i).getItemQuantity() <= max))
+            {
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
+    
+    public ArrayList<Drink> searchDrink(String search, int searchBy)throws ClassNotFoundException{
+        ArrayList<Drink> result=new ArrayList<>();
+        ArrayList<Drink> list;
+        list=readAllDrink();
+        
+        switch (searchBy) {
+            case 0:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Drink".equals(list.get(i).getItemType()) &&(list.get(i).getItemID() == null ? search == null : list.get(i).getItemID().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            case 1:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Drink".equals(list.get(i).getItemType()) &&(list.get(i).getItemName() == null ? search == null : list.get(i).getItemName().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            case 2:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Drink".equals(list.get(i).getItemType()) &&(list.get(i).getArrivalDate() == null ? search == null : list.get(i).getArrivalDate().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            case 3:
+                for (int i=0;i<list.size();i++)
+                {
+                    if ("Drink".equals(list.get(i).getItemType()) && (list.get(i).getExpireDate() == null ? search == null : list.get(i).getExpireDate().equals(search)))
+                    {
+                        result.add(list.get(i));
+                    }
+                }       break;
+            default:
+                break;
+        }
+        return result;
+    }
+    
+    public ArrayList<Drink> searchDrink(double max, double min)throws ClassNotFoundException{
+        ArrayList<Drink> result=new ArrayList<>();
+        ArrayList<Drink> list;
+        list=readAllDrink();
+        for (int i=0;i<list.size();i++)
+        {
+            if ("Drink".equals(list.get(i).getItemType()) && (list.get(i).getItemPrice() >= min && list.get(i).getItemPrice() <= max))
+            {
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
+    
+    public ArrayList<Drink> searchDrink(int max, int min)throws ClassNotFoundException{
+        ArrayList<Drink> result=new ArrayList<>();
+        ArrayList<Drink> list;
+        list=readAllDrink();
+        for (int i=0;i<list.size();i++)
+        {
+            if ("Drink".equals(list.get(i).getItemType()) && (list.get(i).getItemQuantity() >= min && list.get(i).getItemQuantity() <= max))
+            {
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
 }
