@@ -242,6 +242,14 @@ public class Menu extends javax.swing.JFrame {
         new Delete().setVisible(true);
     }//GEN-LAST:event_deleteItemActionPerformed
 
+    private void foodMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        new SearchFoodForm().setVisible(true);  
+    }                                            
+
+    private void drinkMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        new SearchDrinkForm().setVisible(true);
+    } 
+    
     /**
      * @param args the command line arguments
      */
