@@ -4,6 +4,7 @@
  */
 package com.utem.groupproject;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,7 +19,8 @@ public class AddForm extends javax.swing.JFrame {
     private Food food;
     private Drink drink;
     
-    private ItemManager manager = new ItemManager();
+    private FoodManager manageFood = new FoodManager();
+    private DrinkManager manageDrink = new DrinkManager();
     
     private static ArrayList<Food> foodList;
     private static ArrayList<Drink> drinkList;
@@ -51,8 +53,7 @@ public class AddForm extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,10 +78,9 @@ public class AddForm extends javax.swing.JFrame {
         expiredDateChooser = new com.toedter.calendar.JDateChooser();
         priceTxtField = new javax.swing.JFormattedTextField();
         qtyTxtField = new javax.swing.JFormattedTextField();
-        jToolBar1 = new javax.swing.JToolBar();
-        addBtn = new javax.swing.JButton();
-        resetBtn = new javax.swing.JButton();
         returnBtn = new javax.swing.JButton();
+        resetBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Form");
@@ -114,34 +114,59 @@ public class AddForm extends javax.swing.JFrame {
 
         qtyTxtField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        jToolBar1.setRollover(true);
-
-        addBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\plus.png")); // NOI18N
-        addBtn.setText("Add");
-        addBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(addBtn);
-
-        resetBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\icons8-eraser-25.png")); // NOI18N
-        resetBtn.setText("Reset");
-        resetBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetBtnActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(resetBtn);
-
+        returnBtn.setBackground(new java.awt.Color(255, 51, 51));
         returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
+        returnBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                returnBtnMouseMoved(evt);
+            }
+        });
+        returnBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                returnBtnMouseExited(evt);
+            }
+        });
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnBtnActionPerformed(evt);
             }
         });
-        jToolBar1.add(returnBtn);
+
+        resetBtn.setBackground(new java.awt.Color(255, 102, 153));
+        resetBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\icons8-eraser-25.png")); // NOI18N
+        resetBtn.setText("Reset");
+        resetBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                resetBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                resetBtnMouseExited(evt);
+            }
+        });
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+
+        addBtn.setBackground(new java.awt.Color(102, 255, 102));
+        addBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\plus.png")); // NOI18N
+        addBtn.setText("Add");
+        addBtn.setActionCommand("Save");
+        addBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addBtnMouseExited(evt);
+            }
+        });
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,14 +199,18 @@ public class AddForm extends javax.swing.JFrame {
                         .addComponent(jLabel7)))
                 .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addBtn)
+                .addGap(18, 18, 18)
+                .addComponent(resetBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(returnBtn)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel7)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -208,7 +237,12 @@ public class AddForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(qtyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(returnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resetBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -246,14 +280,14 @@ public class AddForm extends javax.swing.JFrame {
         int currFoodNum,currDrinkNum;
         
         try {
-            currFoodNum = manager.readAllFood().size();
+            currFoodNum = manageFood.readAllFood().size();
             foodNum = currFoodNum;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-            currDrinkNum = manager.readAllDrink().size();
+            currDrinkNum = manageDrink.readAllDrink().size();
             drinkNum = currDrinkNum;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -261,6 +295,10 @@ public class AddForm extends javax.swing.JFrame {
         
         if (!isEmpty())
         {
+            if (arrivalDateChooser.getDate().compareTo(expiredDateChooser.getDate()) > 0){
+                JOptionPane.showMessageDialog(null,"Arrival Date cannot be greater than Expired Date","Alert",JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             if (foodBtn.isSelected() == true){
                 foodNum++;
                 food = new Food(){};
@@ -273,7 +311,7 @@ public class AddForm extends javax.swing.JFrame {
                 food.setItemQuantity(Integer.parseInt(qtyTxtField.getText().trim()));
                 
                 try {
-                    manager.saveFood(food);
+                    manageFood.saveFood(food);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AddForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -291,7 +329,7 @@ public class AddForm extends javax.swing.JFrame {
                 drink.setItemQuantity(Integer.parseInt(qtyTxtField.getText().trim()));
                 
                 try {
-                    manager.saveDrink(drink);
+                    manageDrink.saveDrink(drink);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AddForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -304,6 +342,42 @@ public class AddForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"All the fields are required","Alert",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void returnBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnBtnMouseMoved
+        // TODO add your handling code here:
+        returnBtn.setFont(new java.awt.Font("Segeo UI",2,16));
+        returnBtn.setForeground(Color.WHITE);
+    }//GEN-LAST:event_returnBtnMouseMoved
+
+    private void returnBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnBtnMouseExited
+        // TODO add your handling code here:
+        returnBtn.setFont(new java.awt.Font("Segeo UI",0,12));
+        returnBtn.setForeground(Color.BLACK);
+    }//GEN-LAST:event_returnBtnMouseExited
+
+    private void resetBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetBtnMouseExited
+        // TODO add your handling code here:
+        resetBtn.setFont(new java.awt.Font("Segeo UI",0,12));
+        resetBtn.setForeground(Color.BLACK);
+    }//GEN-LAST:event_resetBtnMouseExited
+
+    private void resetBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetBtnMouseEntered
+        // TODO add your handling code here:
+        resetBtn.setFont(new java.awt.Font("Segeo UI",2,16));
+        resetBtn.setForeground(Color.WHITE);
+    }//GEN-LAST:event_resetBtnMouseEntered
+
+    private void addBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseEntered
+        // TODO add your handling code here:
+        addBtn.setFont(new java.awt.Font("Segeo UI",2,16));
+        addBtn.setForeground(Color.WHITE);
+    }//GEN-LAST:event_addBtnMouseEntered
+
+    private void addBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseExited
+        // TODO add your handling code here:
+        addBtn.setFont(new java.awt.Font("Segeo UI",0,12));
+        addBtn.setForeground(Color.BLACK);
+    }//GEN-LAST:event_addBtnMouseExited
 
     /**
      * @param args the command line arguments
@@ -357,7 +431,6 @@ public class AddForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField nameTxtField;
     private javax.swing.JFormattedTextField priceTxtField;
     private javax.swing.JFormattedTextField qtyTxtField;

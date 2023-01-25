@@ -98,9 +98,19 @@ public class Menu extends javax.swing.JFrame {
         searchMenu.setText("Search");
 
         foodMenuItem.setText("Food");
+        foodMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foodMenuItemActionPerformed(evt);
+            }
+        });
         searchMenu.add(foodMenuItem);
 
         drinkMenuItem.setText("Drink");
+        drinkMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drinkMenuItemActionPerformed(evt);
+            }
+        });
         searchMenu.add(drinkMenuItem);
 
         jMenuBar1.add(searchMenu);
@@ -171,6 +181,10 @@ public class Menu extends javax.swing.JFrame {
     private void restockMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockMenuItemActionPerformed
         // TODO add your handling code here:
         String[] option = new String[]{"Food","Drink"};
+        ItemManager manageFood = new FoodManager();
+        ItemManager manageDrink = new DrinkManager();
+        int num = 0;
+        
         int type = JOptionPane.showOptionDialog(null, "Which item's type you want to restock?", "Select Type:", 
                                                       0, 3, null, option, 2);
         if (type != 0 && type != 1){
@@ -183,7 +197,7 @@ public class Menu extends javax.swing.JFrame {
         boolean inputAccepted = false;
         while(!inputAccepted) {
             try {
-              int num = Integer.parseInt(JOptionPane.showInputDialog("The enter the numbers to restock:"));
+              num = Integer.parseInt(JOptionPane.showInputDialog("The enter the numbers to restock:"));
                 if (num < 1) {
                 JOptionPane.showMessageDialog(null,"The input must be greater than 0");
                 } 
@@ -198,6 +212,12 @@ public class Menu extends javax.swing.JFrame {
                   break;
               }
             } 
+        }
+        if (type == 0){
+            manageFood.restock(itemID, num);
+        }
+        else {
+            manageDrink.restock(itemID, num);
         }
     }//GEN-LAST:event_restockMenuItemActionPerformed
 
@@ -242,13 +262,15 @@ public class Menu extends javax.swing.JFrame {
         new Delete().setVisible(true);
     }//GEN-LAST:event_deleteItemActionPerformed
 
-    private void foodMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        new SearchFoodForm().setVisible(true);  
-    }                                            
+    private void foodMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodMenuItemActionPerformed
+        // TODO add your handling code here:
+        new SearchForm(0).setVisible(true); 
+    }//GEN-LAST:event_foodMenuItemActionPerformed
 
-    private void drinkMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        new SearchDrinkForm().setVisible(true);
-    } 
+    private void drinkMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drinkMenuItemActionPerformed
+        // TODO add your handling code here:
+        new SearchForm(1).setVisible(true); 
+    }//GEN-LAST:event_drinkMenuItemActionPerformed
     
     /**
      * @param args the command line arguments

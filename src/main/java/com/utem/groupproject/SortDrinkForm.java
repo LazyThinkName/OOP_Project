@@ -23,7 +23,7 @@ public class SortDrinkForm extends javax.swing.JFrame {
      * Creates new form DisplayForm
      */
     
-    private ItemManager manageDrink = new ItemManager();
+    private DrinkManager manageDrink = new DrinkManager();
     
     private void displayItem() throws ClassNotFoundException{
         drink = manageDrink.readAllDrink();
@@ -188,8 +188,6 @@ public class SortDrinkForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

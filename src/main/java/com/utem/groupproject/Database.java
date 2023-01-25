@@ -27,7 +27,6 @@ public class Database {
             try{
                 Class.forName(driver);
                 conn = (Connection)DriverManager.getConnection(url+dbName,username,password);
-                JOptionPane.showMessageDialog(null,"Connection Successful");
             }
             catch(SQLException err){
                 JOptionPane.showMessageDialog(null,err.getMessage());

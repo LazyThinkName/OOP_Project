@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 public class Delete extends javax.swing.JFrame {
      private ArrayList<Drink> drinkList;
      private ArrayList<Food> foodList;
-     private ItemManager manager = new ItemManager();
+     private DrinkManager managerDrink = new DrinkManager();
+     private FoodManager managerFood = new FoodManager();
     /**
      * Creates new form DisplayForm
      */
@@ -41,7 +42,7 @@ public class Delete extends javax.swing.JFrame {
         returnBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Delete Item");
@@ -54,6 +55,9 @@ public class Delete extends javax.swing.JFrame {
             }
         });
 
+        returnBtn.setBackground(new java.awt.Color(51, 0, 255));
+        returnBtn.setForeground(new java.awt.Color(255, 255, 255));
+        returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +65,9 @@ public class Delete extends javax.swing.JFrame {
             }
         });
 
+        deleteBtn.setBackground(new java.awt.Color(255, 255, 51));
+        deleteBtn.setForeground(new java.awt.Color(255, 0, 51));
+        deleteBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\minus.png")); // NOI18N
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,37 +80,36 @@ public class Delete extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(deleteBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(returnBtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabel1)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(returnBtn)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
+                    .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(returnBtn)
-                    .addComponent(deleteBtn))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,7 +135,7 @@ public class Delete extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Enter the item ID", "Validate input", JOptionPane.WARNING_MESSAGE);
         }
         try {
-            drinkList = manager.readAllDrink();
+            drinkList = managerDrink.readAllDrink();
             for(Drink x: drinkList){
                 if(x.getItemID().equals(nameTxtField.getText())){
                     //Display confirmation message box to delete the item
@@ -137,7 +143,7 @@ public class Delete extends javax.swing.JFrame {
                     //if user choose Yes
                     if(result == JOptionPane.YES_OPTION){
                         //Call method to delete item based on item number
-                        manager.deleteDrink(x.getItemID().trim());
+                        managerDrink.delete(x.getItemID().trim());
                         JOptionPane.showMessageDialog(null, "The item has been deleted!");
                         //Set the new state buttons
                         deleteBtn.setEnabled(true);
@@ -150,7 +156,7 @@ public class Delete extends javax.swing.JFrame {
             Logger.getLogger(Delete.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            foodList = manager.readAllFood();
+            foodList = managerFood.readAllFood();
             for(Food x: foodList){
                 if(x.getItemID().equals(nameTxtField.getText())){
                     //Display confirmation message box to delete the item
@@ -158,7 +164,7 @@ public class Delete extends javax.swing.JFrame {
                     //if user choose Yes
                     if(result == JOptionPane.YES_OPTION){
                         //Call method to delete item based on item number
-                        manager.deleteFood(x.getItemID().trim());
+                        managerFood.delete(x.getItemID().trim());
                         JOptionPane.showMessageDialog(null, "The item has been deleted!");
                         //Set the new state buttons
                         deleteBtn.setEnabled(true);

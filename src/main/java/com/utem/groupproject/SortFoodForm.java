@@ -22,7 +22,7 @@ public class SortFoodForm extends javax.swing.JFrame {
     /**
      * Creates new form DisplayForm
      */
-    private final ItemManager manageFood = new ItemManager();
+    private FoodManager manageFood = new FoodManager();
    
     
     private void clearForm(){

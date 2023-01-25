@@ -22,7 +22,8 @@ public class Edit extends javax.swing.JFrame {
     
     private String type,editID;
     
-    private ItemManager manage = new ItemManager();
+    private FoodManager manageFood = new FoodManager();
+    private DrinkManager manageDrink = new DrinkManager();
     /**
      * Creates new form Edit
      */
@@ -48,7 +49,7 @@ public class Edit extends javax.swing.JFrame {
     
     private void initialForm() throws ClassNotFoundException{
         if ("Food".equals(type)){
-            food = manage.searchFood(editID);
+            food = manageFood.searchFood(editID);
             nameTxtField1.setText(food.getItemName());
             arrivalDateChooser1.setCalendar(null);
             expiredDateChooser1.setCalendar(null);
@@ -56,7 +57,7 @@ public class Edit extends javax.swing.JFrame {
             qtyTxtField1.setText(String.valueOf(food.getItemQuantity()));
         }
         else{
-            drink = manage.searchDrink(editID);
+            drink = manageDrink.searchDrink(editID);
             nameTxtField1.setText(drink.getItemName());
             arrivalDateChooser1.setCalendar(null);
             expiredDateChooser1.setCalendar(null);
@@ -109,6 +110,7 @@ public class Edit extends javax.swing.JFrame {
         returnBtn = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         idTxtField = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
 
         jLabel4.setText("Item Price(RM): ");
 
@@ -211,11 +213,14 @@ public class Edit extends javax.swing.JFrame {
 
         jLabel14.setText("Item ID: ");
 
+        searchBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\loupe.png")); // NOI18N
+        searchBtn.setText("Search");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
@@ -236,13 +241,15 @@ public class Edit extends javax.swing.JFrame {
                                 .addComponent(foodBtn1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(drinkBtn1)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 32, Short.MAX_VALUE))
                             .addComponent(arrivalDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(expiredDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(priceTxtField1)
                             .addComponent(qtyTxtField1)
                             .addComponent(idTxtField))))
-                .addGap(66, 66, 66))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchBtn)
+                .addContainerGap())
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -253,7 +260,8 @@ public class Edit extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(idTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -391,5 +399,6 @@ public class Edit extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField qtyTxtField1;
     private javax.swing.JButton resetBtn;
     private javax.swing.JButton returnBtn;
+    private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables
 }
