@@ -189,13 +189,17 @@ public class SearchForm extends javax.swing.JFrame {
         expiryDateChooser.setDateFormatString("dd/MM/yyyy");
         getContentPane().add(expiryDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 610, -1));
 
+        returnBtn.setBackground(new java.awt.Color(255, 0, 0));
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(255, 255, 255));
+        returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(returnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, 20));
+        getContentPane().add(returnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 110, 40));
 
         pack();
         setLocationRelativeTo(null);

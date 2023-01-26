@@ -162,6 +162,7 @@ public class Edit extends javax.swing.JFrame {
         jLabel7.setText("Arrival Date: ");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(300, 250));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Edit Item Details");

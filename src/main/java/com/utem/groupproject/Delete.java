@@ -45,6 +45,7 @@ public class Delete extends javax.swing.JFrame{
         deleteBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(300, 250));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Delete Item");
@@ -175,6 +176,7 @@ public class Delete extends javax.swing.JFrame{
             Logger.getLogger(Delete.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "No Item Found");
         }
+        nameTxtField.setText("");
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     /**

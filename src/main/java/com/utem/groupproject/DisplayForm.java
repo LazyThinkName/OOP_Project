@@ -47,7 +47,6 @@ public class DisplayForm extends javax.swing.JFrame {
             Object rowData[] = new Object[7];
             
             for(Food f: food){
-                
                 rowData[0] = f.getItemID();
                 rowData[1] = f.getItemName();
                 rowData[2] = f.getItemType();
@@ -92,6 +91,7 @@ public class DisplayForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(300, 250));
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         jLabel1.setText("Items at Grocery");

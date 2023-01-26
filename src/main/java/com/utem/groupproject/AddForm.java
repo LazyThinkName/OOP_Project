@@ -84,6 +84,8 @@ public class AddForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Form");
+        setForeground(new java.awt.Color(255, 255, 255));
+        setLocation(new java.awt.Point(300, 250));
 
         jLabel1.setText("Item Name: ");
 
@@ -302,7 +304,7 @@ public class AddForm extends javax.swing.JFrame {
         if (!isEmpty())
         {
             if (arrivalDateChooser.getDate().compareTo(expiredDateChooser.getDate()) > 0){
-                JOptionPane.showMessageDialog(null,"Arrival Date cannot be greater than Expired Date","Alert",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Arrival Date cannot be smaller than Expired Date","Alert",JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if (foodBtn.isSelected() == true){
@@ -351,38 +353,38 @@ public class AddForm extends javax.swing.JFrame {
 
     private void returnBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnBtnMouseMoved
         // TODO add your handling code here:
-        returnBtn.setFont(new java.awt.Font("Segeo UI",2,16));
-        returnBtn.setForeground(Color.WHITE);
+        returnBtn.setFont(new java.awt.Font("Segeo UI",1,16));
+        returnBtn.setForeground(Color.BLACK);
     }//GEN-LAST:event_returnBtnMouseMoved
 
     private void returnBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnBtnMouseExited
         // TODO add your handling code here:
-        returnBtn.setFont(new java.awt.Font("Segeo UI",0,12));
-        returnBtn.setForeground(Color.BLACK);
+        returnBtn.setFont(new java.awt.Font("Segeo UI",1,14));
+        returnBtn.setForeground(Color.WHITE);
     }//GEN-LAST:event_returnBtnMouseExited
 
     private void resetBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetBtnMouseExited
         // TODO add your handling code here:
-        resetBtn.setFont(new java.awt.Font("Segeo UI",0,12));
-        resetBtn.setForeground(Color.BLACK);
+        resetBtn.setFont(new java.awt.Font("Segeo UI",1,14));
+        resetBtn.setForeground(Color.WHITE);
     }//GEN-LAST:event_resetBtnMouseExited
 
     private void resetBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetBtnMouseEntered
         // TODO add your handling code here:
-        resetBtn.setFont(new java.awt.Font("Segeo UI",2,16));
-        resetBtn.setForeground(Color.WHITE);
+        resetBtn.setFont(new java.awt.Font("Segeo UI",1,16));
+        resetBtn.setForeground(Color.BLACK);
     }//GEN-LAST:event_resetBtnMouseEntered
 
     private void addBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseEntered
         // TODO add your handling code here:
-        addBtn.setFont(new java.awt.Font("Segeo UI",2,16));
-        addBtn.setForeground(Color.WHITE);
+        addBtn.setFont(new java.awt.Font("Segeo UI",1,16));
+        addBtn.setForeground(Color.BLACK);
     }//GEN-LAST:event_addBtnMouseEntered
 
     private void addBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseExited
         // TODO add your handling code here:
-        addBtn.setFont(new java.awt.Font("Segeo UI",0,12));
-        addBtn.setForeground(Color.BLACK);
+        addBtn.setFont(new java.awt.Font("Segeo UI",1,14));
+        addBtn.setForeground(Color.WHITE);
     }//GEN-LAST:event_addBtnMouseExited
 
     /**

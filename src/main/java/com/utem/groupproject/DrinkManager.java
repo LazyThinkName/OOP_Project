@@ -57,7 +57,7 @@ public class DrinkManager implements Deletable,Restockable{
         int qty = drink.getItemQuantity();
         
         try{
-            String SQL = "UPDATE drink SET ARRIVALDATE=?, EXPIREDDATE=?, PRICE = ?, QUANTITY = ?, WHERE DRINKID = ?";
+            String SQL = "UPDATE drink SET ARRIVALDATE = ?, EXPIREDDATE = ?, PRICE = ?, QUANTITY = ? WHERE DRINKID = ?";
             //Declare object to execute parameterized query
             PreparedStatement ps = db.openConnection().prepareStatement(SQL);
             ps.setString(1, arrival);
