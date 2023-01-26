@@ -48,7 +48,7 @@ public class SortFoodForm extends javax.swing.JFrame {
                 rowData[1] = f.getItemName();
                 rowData[2] = f.getItemType();
                 rowData[3] = f.getArrivalDate();
-                rowData[4] = f.getExpireDate();
+                rowData[4] = f.getExpiredDate();
                 rowData[5] = df.format(f.getItemPrice());
                 rowData[6] = f.getItemQuantity();
                 
@@ -108,6 +108,10 @@ public class SortFoodForm extends javax.swing.JFrame {
             foodTable.getColumnModel().getColumn(6).setPreferredWidth(30);
         }
 
+        returnBtn.setBackground(new java.awt.Color(255, 51, 0));
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(255, 255, 255));
+        returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +143,6 @@ public class SortFoodForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(returnBtn)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel7)
                             .addGap(548, 548, 548))
@@ -149,7 +152,10 @@ public class SortFoodForm extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(102, 102, 102)
                         .addComponent(jLabel1))
-                    .addComponent(jLabel5)))
+                    .addComponent(jLabel5)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(returnBtn)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,9 +177,9 @@ public class SortFoodForm extends javax.swing.JFrame {
                         .addComponent(jLabel9)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(returnBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();

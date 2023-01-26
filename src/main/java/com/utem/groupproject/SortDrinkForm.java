@@ -43,7 +43,7 @@ public class SortDrinkForm extends javax.swing.JFrame {
                 rowData[1] = d.getItemName();
                 rowData[2] = d.getItemType();
                 rowData[3] = d.getArrivalDate();
-                rowData[4] = d.getExpireDate();
+                rowData[4] = d.getExpiredDate();
                 rowData[5] = df.format(d.getItemPrice());
                 rowData[6] = d.getItemQuantity();
                 
@@ -102,6 +102,10 @@ public class SortDrinkForm extends javax.swing.JFrame {
             drinkTable.getColumnModel().getColumn(6).setPreferredWidth(30);
         }
 
+        returnBtn.setBackground(new java.awt.Color(255, 0, 0));
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(255, 255, 255));
+        returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,22 +133,20 @@ public class SortDrinkForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(595, 595, 595)
-                .addComponent(returnBtn)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(returnBtn)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel7)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(101, 101, 101)
+                            .addComponent(jLabel1))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,9 +168,9 @@ public class SortDrinkForm extends javax.swing.JFrame {
                         .addComponent(jLabel9)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(returnBtn)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();

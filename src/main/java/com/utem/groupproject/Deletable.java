@@ -4,11 +4,12 @@
  */
 package com.utem.groupproject;
 
+
 /**
  *
  * @author mangy
  */
-interface ItemManager{
+public interface Deletable{
     public void delete(String deleteID);
-    public void restock(String restockID,int restockNum);
+    
 }

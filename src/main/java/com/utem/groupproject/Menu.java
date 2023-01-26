@@ -30,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         addMenu = new javax.swing.JMenu();
         newMenuItem = new javax.swing.JMenuItem();
@@ -47,7 +48,10 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grocery Inventory System");
+        setForeground(new java.awt.Color(255, 255, 255));
         setLocation(new java.awt.Point(300, 250));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\grocery.png")); // NOI18N
 
         jMenuBar1.setBackground(new java.awt.Color(204, 0, 255));
         jMenuBar1.setAlignmentY(0.5F);
@@ -151,11 +155,13 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 263, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,8 +187,8 @@ public class Menu extends javax.swing.JFrame {
     private void restockMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockMenuItemActionPerformed
         // TODO add your handling code here:
         String[] option = new String[]{"Food","Drink"};
-        ItemManager manageFood = new FoodManager();
-        ItemManager manageDrink = new DrinkManager();
+        Restockable manageFood = new FoodManager();
+        Restockable manageDrink = new DrinkManager();
         int num = 0;
         
         int type = JOptionPane.showOptionDialog(null, "Which item's type you want to restock?", "Select Type:", 
@@ -254,7 +260,49 @@ public class Menu extends javax.swing.JFrame {
 
     private void propertiesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propertiesMenuItemActionPerformed
         // TODO add your handling code here:
-        new Edit().setVisible(true);
+        String[] option = new String[]{"Food","Drink"};
+        Food food;
+        Drink drink;
+        FoodManager manageFood = new FoodManager();
+        DrinkManager manageDrink = new DrinkManager();
+        
+        int type = JOptionPane.showOptionDialog(null, "Which item's type you want to edit?", "Select Type:", 
+                                                      0, 3, null, option, 2);
+        if (type != 0 && type != 1){
+            return;
+        }
+        String itemID = JOptionPane.showInputDialog("What is the ID of the item you want to edit?");
+        if (itemID == null){
+            JOptionPane.showMessageDialog(null,"The field cannot be empty");
+            return;
+        }
+        if (type == 0){
+            try {
+                food = manageFood.searchFood(itemID);
+                if (food.getItemName() == null){
+                    JOptionPane.showMessageDialog(null, "No Item Found!");
+                }
+                else {
+                    new Edit(type,itemID).setVisible(true);
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            try {
+                drink = manageDrink.searchDrink(itemID);
+                if (drink.getItemName() == null){
+                    JOptionPane.showMessageDialog(null, "No Item Found!");                    
+                }
+                else {
+                    new Edit(type,itemID).setVisible(true);
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }//GEN-LAST:event_propertiesMenuItemActionPerformed
 
     private void deleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteItemActionPerformed
@@ -315,6 +363,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu exitMenu;
     private javax.swing.JMenuItem foodMenuItem;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem newMenuItem;
     private javax.swing.JMenuItem propertiesMenuItem;

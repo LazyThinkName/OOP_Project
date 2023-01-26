@@ -4,11 +4,14 @@
  */
 package com.utem.groupproject;
 
+import java.io.Serializable;
+
+
 /**
  *
  * @author mangy
  */
-public abstract class Food extends Item {
+public abstract class Food extends Item implements Serializable{
     public Food() {}
     
     @Override

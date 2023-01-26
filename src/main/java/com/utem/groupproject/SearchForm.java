@@ -49,7 +49,7 @@ public class SearchForm extends javax.swing.JFrame {
             rowData[1]=result.get(i).getItemName();
             rowData[2]=result.get(i).getItemType();
             rowData[3]=result.get(i).getArrivalDate();
-            rowData[4]=result.get(i).getExpireDate();
+            rowData[4]=result.get(i).getExpiredDate();
             rowData[5]=result.get(i).getItemPrice();
             rowData[6]=result.get(i).getItemQuantity();
             model.addRow(rowData);
@@ -65,7 +65,7 @@ public class SearchForm extends javax.swing.JFrame {
             rowData[1]=result.get(i).getItemName();
             rowData[2]=result.get(i).getItemType();
             rowData[3]=result.get(i).getArrivalDate();
-            rowData[4]=result.get(i).getExpireDate();
+            rowData[4]=result.get(i).getExpiredDate();
             rowData[5]=result.get(i).getItemPrice();
             rowData[6]=result.get(i).getItemQuantity();
             model.addRow(rowData);
@@ -132,7 +132,7 @@ public class SearchForm extends javax.swing.JFrame {
             itemTable.getColumnModel().getColumn(6).setHeaderValue("Quantity In Stock");
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 710, 350));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 730, 350));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 720, 370));
 
@@ -145,13 +145,16 @@ public class SearchForm extends javax.swing.JFrame {
         searchComboBox.setSelectedIndex(0);
         getContentPane().add(searchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
+        searchBtn.setBackground(new java.awt.Color(255, 255, 0));
+        searchBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        searchBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\loupe.png")); // NOI18N
         searchBtn.setText("Search");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 90, -1));
+        getContentPane().add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 110, -1));
 
         minTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

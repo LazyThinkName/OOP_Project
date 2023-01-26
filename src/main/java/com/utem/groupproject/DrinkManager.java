@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author mangy
  */
-class DrinkManager implements ItemManager{
+public class DrinkManager implements Deletable,Restockable{
     private Drink drink = new Drink() {};
     private ArrayList<Drink> drinkList;
     private Database db = new Database();
@@ -45,14 +45,14 @@ class DrinkManager implements ItemManager{
         catch (SQLException err)
         {
             JOptionPane.showMessageDialog(null,err.getMessage());
+            JOptionPane.showMessageDialog(null,"No Drink Found!");
         }
-         JOptionPane.showMessageDialog(null,"Connected");
         return drinkList;
     }
     
-    public void edit(String editDrinkID, Drink drink) throws ClassNotFoundException{
+    public void editDrink(String editDrinkID, Drink drink) throws ClassNotFoundException{
         String arrival = drink.getArrivalDate();
-        String expired = drink.getExpireDate();
+        String expired = drink.getExpiredDate();
         double price = drink.getItemPrice();
         int qty = drink.getItemQuantity();
         
@@ -78,7 +78,7 @@ class DrinkManager implements ItemManager{
         String type = drink.getItemType();
         String name = drink.getItemName();
         String arrival = drink.getArrivalDate();
-        String expired = drink.getExpireDate();
+        String expired = drink.getExpiredDate();
         double price = drink.getItemPrice();
         int qty = drink.getItemQuantity();
         
@@ -180,7 +180,7 @@ class DrinkManager implements ItemManager{
             case 3:
                 for (int i=0;i<list.size();i++)
                 {
-                    if ("Drink".equals(list.get(i).getItemType()) && (list.get(i).getExpireDate() == null ? search == null : list.get(i).getExpireDate().equals(search)))
+                    if ("Drink".equals(list.get(i).getItemType()) && (list.get(i).getExpiredDate() == null ? search == null : list.get(i).getExpiredDate().equals(search)))
                     {
                         result.add(list.get(i));
                     }
@@ -248,4 +248,5 @@ class DrinkManager implements ItemManager{
             Logger.getLogger(FoodManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

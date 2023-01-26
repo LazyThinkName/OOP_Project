@@ -4,7 +4,11 @@
  */
 package com.utem.groupproject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -48,9 +52,11 @@ public class Edit extends javax.swing.JFrame {
     }
     
     private void initialForm() throws ClassNotFoundException{
-        if ("Food".equals(type)){
+        if ("Food".equals(type)){          
             food = manageFood.searchFood(editID);
+            idTxtField.setText(food.getItemID());
             nameTxtField1.setText(food.getItemName());
+            foodBtn1.setSelected(true);
             arrivalDateChooser1.setCalendar(null);
             expiredDateChooser1.setCalendar(null);
             priceTxtField1.setText(String.valueOf(food.getItemPrice()));
@@ -58,13 +64,28 @@ public class Edit extends javax.swing.JFrame {
         }
         else{
             drink = manageDrink.searchDrink(editID);
+            idTxtField.setText(drink.getItemID());
             nameTxtField1.setText(drink.getItemName());
+            drinkBtn1.setSelected(true);
             arrivalDateChooser1.setCalendar(null);
             expiredDateChooser1.setCalendar(null);
             priceTxtField1.setText(String.valueOf(drink.getItemPrice()));
             qtyTxtField1.setText(String.valueOf(drink.getItemQuantity()));
         }
         
+    }
+    
+    private boolean isEmpty(){
+        if (idTxtField.getText() == null || arrivalDateChooser1.getDate() == null || 
+            expiredDateChooser1.getDate() == null || priceTxtField1.getText() == null||
+            qtyTxtField1.getText() == null)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
     }
 
     /**
@@ -97,20 +118,18 @@ public class Edit extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         qtyTxtField1 = new javax.swing.JFormattedTextField();
         nameTxtField1 = new javax.swing.JTextField();
-        arrivalDateChooser1 = new com.toedter.calendar.JDateChooser();
         foodBtn1 = new javax.swing.JRadioButton();
         drinkBtn1 = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
-        expiredDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jToolBar1 = new javax.swing.JToolBar();
+        jLabel14 = new javax.swing.JLabel();
+        idTxtField = new javax.swing.JTextField();
         editBtn = new javax.swing.JButton();
         resetBtn = new javax.swing.JButton();
         returnBtn = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        idTxtField = new javax.swing.JTextField();
-        searchBtn = new javax.swing.JButton();
+        arrivalDateChooser1 = new com.toedter.calendar.JDateChooser();
+        expiredDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jLabel4.setText("Item Price(RM): ");
 
@@ -164,26 +183,29 @@ public class Edit extends javax.swing.JFrame {
             }
         });
 
-        arrivalDateChooser1.setDateFormatString("dd/MM/yyyy");
-
+        foodBtn1.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(foodBtn1);
         foodBtn1.setText("Food");
         foodBtn1.setEnabled(false);
 
+        drinkBtn1.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(drinkBtn1);
         drinkBtn1.setText("Drink");
         drinkBtn1.setEnabled(false);
 
         jLabel11.setText("Item Name: ");
 
-        expiredDateChooser1.setDateFormatString("dd/MM/yyyy");
-
         jLabel12.setText("Item Type: ");
 
         jLabel13.setText("Arrival Date: ");
 
-        jToolBar1.setRollover(true);
+        jLabel14.setText("Item ID: ");
 
+        idTxtField.setEnabled(false);
+
+        editBtn.setBackground(new java.awt.Color(102, 102, 255));
+        editBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editBtn.setForeground(new java.awt.Color(255, 255, 255));
         editBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\pencil.png")); // NOI18N
         editBtn.setText("Edit");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -191,8 +213,10 @@ public class Edit extends javax.swing.JFrame {
                 editBtnActionPerformed(evt);
             }
         });
-        jToolBar1.add(editBtn);
 
+        resetBtn.setBackground(new java.awt.Color(255, 51, 153));
+        resetBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
         resetBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\icons8-eraser-25.png")); // NOI18N
         resetBtn.setText("Reset");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -200,8 +224,10 @@ public class Edit extends javax.swing.JFrame {
                 resetBtnActionPerformed(evt);
             }
         });
-        jToolBar1.add(resetBtn);
 
+        returnBtn.setBackground(new java.awt.Color(255, 0, 0));
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -209,12 +235,10 @@ public class Edit extends javax.swing.JFrame {
                 returnBtnActionPerformed(evt);
             }
         });
-        jToolBar1.add(returnBtn);
 
-        jLabel14.setText("Item ID: ");
+        arrivalDateChooser1.setDateFormatString("dd/MM/yyyy");
 
-        searchBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\loupe.png")); // NOI18N
-        searchBtn.setText("Search");
+        expiredDateChooser1.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,20 +261,25 @@ public class Edit extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nameTxtField1)
+                            .addComponent(priceTxtField1)
+                            .addComponent(qtyTxtField1)
+                            .addComponent(idTxtField)
+                            .addComponent(arrivalDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(foodBtn1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(drinkBtn1)
                                 .addGap(0, 32, Short.MAX_VALUE))
-                            .addComponent(arrivalDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(expiredDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(priceTxtField1)
-                            .addComponent(qtyTxtField1)
-                            .addComponent(idTxtField))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchBtn)
-                .addContainerGap())
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(expiredDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(111, 111, 111))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(resetBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(returnBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,8 +289,7 @@ public class Edit extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(idTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -275,11 +303,11 @@ public class Edit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
                     .addComponent(arrivalDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(expiredDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(priceTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -287,8 +315,12 @@ public class Edit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(qtyTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editBtn)
+                    .addComponent(resetBtn)
+                    .addComponent(returnBtn))
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -309,7 +341,11 @@ public class Edit extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE);
         
         if (result == JOptionPane.YES_NO_OPTION ){
-            
+            try {
+                initialForm();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Edit.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_resetBtnActionPerformed
 
@@ -326,7 +362,45 @@ public class Edit extends javax.swing.JFrame {
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
-        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (!isEmpty()){
+//            if (arrivalDateChooser.getDate().compareTo(expiredDateChooser.getDate()) > 0){
+//                JOptionPane.showMessageDialog(null,"Arrival Date cannot be greater than Expired Date","Alert",JOptionPane.WARNING_MESSAGE);
+//                return;
+//            }
+            if ("Food".equals(type)){
+                try {
+                    food.setItemID(editID);
+                    food.setItemType(type);
+                    food.setItemName(nameTxtField1.getText().trim());
+                    food.setArrivalDate(sdf.format(arrivalDateChooser1.getDate()));
+                    food.setExpiredDate(sdf.format(expiredDateChooser1.getDate()));
+                    food.setItemPrice(Double.parseDouble(priceTxtField1.getText().trim()));
+                    food.setItemQuantity(Integer.parseInt(qtyTxtField1.getText().trim()));
+                    manageFood.editFood(editID, food);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Edit.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else {
+                try {
+                    drink.setItemID(editID);
+                    drink.setItemType(type);
+                    drink.setItemName(nameTxtField1.getText().trim());
+                    drink.setArrivalDate(sdf.format(arrivalDateChooser1.getDate()));
+                    drink.setExpiredDate(sdf.format(expiredDateChooser1.getDate()));
+                    drink.setItemPrice(Double.parseDouble(priceTxtField1.getText().trim()));
+                    drink.setItemQuantity(Integer.parseInt(qtyTxtField1.getText().trim()));
+                    manageDrink.editDrink(editID, drink);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Edit.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            JOptionPane.showMessageDialog(null,"The item has been updated!");
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"All the fields are required","Alert",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_editBtnActionPerformed
 
     /**
@@ -390,7 +464,6 @@ public class Edit extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField nameTxtField;
     private javax.swing.JTextField nameTxtField1;
     private javax.swing.JFormattedTextField priceTxtField;
@@ -399,6 +472,5 @@ public class Edit extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField qtyTxtField1;
     private javax.swing.JButton resetBtn;
     private javax.swing.JButton returnBtn;
-    private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables
 }

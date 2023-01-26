@@ -19,11 +19,19 @@ import javax.swing.table.DefaultTableModel;
 public class DisplayForm extends javax.swing.JFrame {
     private ArrayList<Food> food;
     private ArrayList<Drink> drink;
+    
+    private ArrayList<Food> deletedFList;
+    private ArrayList<Drink> deletedDList;
     /**
      * Creates new form DisplayForm
      */
     private FoodManager manageFood = new FoodManager();
     private DrinkManager manageDrink = new DrinkManager();
+    
+    public DisplayForm() throws ClassNotFoundException {
+        initComponents();
+        displayItem();
+    }
     
     private void displayItem() throws ClassNotFoundException{
         food = manageFood.readAllFood();
@@ -32,7 +40,9 @@ public class DisplayForm extends javax.swing.JFrame {
             DecimalFormat df = new DecimalFormat("0.00");
             
             DefaultTableModel tableContent = (DefaultTableModel) foodTable.getModel();
+            tableContent.setRowCount(0);
             DefaultTableModel dtableContent = (DefaultTableModel) drinkTable.getModel();
+            dtableContent.setRowCount(0);
             
             Object rowData[] = new Object[7];
             
@@ -42,7 +52,7 @@ public class DisplayForm extends javax.swing.JFrame {
                 rowData[1] = f.getItemName();
                 rowData[2] = f.getItemType();
                 rowData[3] = f.getArrivalDate();
-                rowData[4] = f.getExpireDate();
+                rowData[4] = f.getExpiredDate();
                 rowData[5] = df.format(f.getItemPrice());
                 rowData[6] = f.getItemQuantity();
                 
@@ -55,16 +65,12 @@ public class DisplayForm extends javax.swing.JFrame {
                 rowData[1] = d.getItemName();
                 rowData[2] = d.getItemType();
                 rowData[3] = d.getArrivalDate();
-                rowData[4] = d.getExpireDate();
+                rowData[4] = d.getExpiredDate();
                 rowData[5] = df.format(d.getItemPrice());
                 rowData[6] = d.getItemQuantity();
                 
                 dtableContent.addRow(rowData);
             }
-    }
-    public DisplayForm() throws ClassNotFoundException {
-        initComponents();
-        displayItem();
     }
 
     /**
@@ -82,8 +88,8 @@ public class DisplayForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         drinkTable = new javax.swing.JTable();
         returnBtn = new javax.swing.JToggleButton();
-        editBtn1 = new javax.swing.JButton();
-        editBtn2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -135,6 +141,8 @@ public class DisplayForm extends javax.swing.JFrame {
         }
 
         returnBtn.setBackground(new java.awt.Color(255, 51, 0));
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -143,9 +151,13 @@ public class DisplayForm extends javax.swing.JFrame {
             }
         });
 
-        editBtn1.setText("Edit");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\hamburger.png")); // NOI18N
+        jLabel2.setText("Foods");
 
-        editBtn2.setText("Edit");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\soft-drink.png")); // NOI18N
+        jLabel3.setText("Drinks");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,32 +165,35 @@ public class DisplayForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(returnBtn)
-                    .addComponent(editBtn1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(editBtn2))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(returnBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(editBtn1)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editBtn2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(returnBtn)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -198,9 +213,7 @@ public class DisplayForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -241,10 +254,10 @@ public class DisplayForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable drinkTable;
-    private javax.swing.JButton editBtn1;
-    private javax.swing.JButton editBtn2;
     private javax.swing.JTable foodTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton returnBtn;

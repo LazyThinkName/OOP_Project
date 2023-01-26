@@ -115,6 +115,8 @@ public class AddForm extends javax.swing.JFrame {
         qtyTxtField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         returnBtn.setBackground(new java.awt.Color(255, 51, 51));
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
         returnBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -134,6 +136,8 @@ public class AddForm extends javax.swing.JFrame {
         });
 
         resetBtn.setBackground(new java.awt.Color(255, 102, 153));
+        resetBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
         resetBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\icons8-eraser-25.png")); // NOI18N
         resetBtn.setText("Reset");
         resetBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,6 +155,8 @@ public class AddForm extends javax.swing.JFrame {
         });
 
         addBtn.setBackground(new java.awt.Color(102, 255, 102));
+        addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(255, 255, 255));
         addBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\plus.png")); // NOI18N
         addBtn.setText("Add");
         addBtn.setActionCommand("Save");

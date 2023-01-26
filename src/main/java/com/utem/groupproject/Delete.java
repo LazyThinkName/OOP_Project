@@ -9,13 +9,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author carme
  */
-public class Delete extends javax.swing.JFrame {
+public class Delete extends javax.swing.JFrame{
      private ArrayList<Drink> drinkList;
      private ArrayList<Food> foodList;
+     
      private DrinkManager managerDrink = new DrinkManager();
      private FoodManager managerFood = new FoodManager();
     /**
@@ -56,6 +58,7 @@ public class Delete extends javax.swing.JFrame {
         });
 
         returnBtn.setBackground(new java.awt.Color(51, 0, 255));
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         returnBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\undo.png")); // NOI18N
         returnBtn.setText("Return");
@@ -66,6 +69,7 @@ public class Delete extends javax.swing.JFrame {
         });
 
         deleteBtn.setBackground(new java.awt.Color(255, 255, 51));
+        deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         deleteBtn.setForeground(new java.awt.Color(255, 0, 51));
         deleteBtn.setIcon(new javax.swing.ImageIcon("D:\\mangy\\Documents\\Sem 3\\OOP\\GUIProject\\GroupProject\\src\\main\\src\\minus.png")); // NOI18N
         deleteBtn.setText("Delete");
@@ -142,12 +146,9 @@ public class Delete extends javax.swing.JFrame {
                     int result = JOptionPane.showConfirmDialog(null, "Are you sure to delete the item?", "Delete item", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     //if user choose Yes
                     if(result == JOptionPane.YES_OPTION){
-                        //Call method to delete item based on item number
+                        //Call method to delete item based on item number            
                         managerDrink.delete(x.getItemID().trim());
-                        JOptionPane.showMessageDialog(null, "The item has been deleted!");
-                        //Set the new state buttons
-                        deleteBtn.setEnabled(true);
-                        
+                        JOptionPane.showMessageDialog(null, "The item has been deleted!");                     
                     }
                      break;
                 }
@@ -163,17 +164,16 @@ public class Delete extends javax.swing.JFrame {
                     int result = JOptionPane.showConfirmDialog(null, "Are you sure to delete the item?", "Delete item", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     //if user choose Yes
                     if(result == JOptionPane.YES_OPTION){
-                        //Call method to delete item based on item number
+                        //Call method to delete item based on item number                                               
                         managerFood.delete(x.getItemID().trim());
                         JOptionPane.showMessageDialog(null, "The item has been deleted!");
-                        //Set the new state buttons
-                        deleteBtn.setEnabled(true);
                     }
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {                 
             Logger.getLogger(Delete.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No Item Found");
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 

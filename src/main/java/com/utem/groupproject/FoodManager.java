@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.utem.groupproject;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author mangy
  */
-class FoodManager implements ItemManager{
+public class FoodManager implements Deletable,Restockable{
     private ArrayList<Food> foodList;
     private Database db = new Database();
     private Food food = new Food() {};
@@ -46,6 +45,7 @@ class FoodManager implements ItemManager{
         catch (SQLException err)
         {
             JOptionPane.showMessageDialog(null,err.getMessage());
+            JOptionPane.showMessageDialog(null,"No Food Found!");
         }
         return foodList;
     }
@@ -56,7 +56,7 @@ class FoodManager implements ItemManager{
         String type = food.getItemType();
         String name = food.getItemName();
         String arrival = food.getArrivalDate();
-        String expired = food.getExpireDate();
+        String expired = food.getExpiredDate();
         double price = food.getItemPrice();
         int qty = food.getItemQuantity();
         
@@ -83,12 +83,12 @@ class FoodManager implements ItemManager{
     
     public void editFood(String editFoodID, Food food) throws ClassNotFoundException{
         String arrival = food.getArrivalDate();
-        String expired = food.getExpireDate();
+        String expired = food.getExpiredDate();
         double price = food.getItemPrice();
         int qty = food.getItemQuantity();
         
         try{
-            String SQL = "UPDATE food SET ARRIVALDATE=?, EXPIREDDATE=?, PRICE = ?, QUANTITY = ?, WHERE FOODID = ?";
+            String SQL = "UPDATE food SET ARRIVALDATE = ?, EXPIREDDATE = ?, PRICE = ?, QUANTITY = ? WHERE FOODID = ?";
             //Declare object to execute parameterized query
             PreparedStatement ps = db.openConnection().prepareStatement(SQL);
             ps.setString(1, arrival);
@@ -169,7 +169,7 @@ class FoodManager implements ItemManager{
             case 3:
                 for (int i=0;i<list.size();i++)
                 {
-                    if ("Food".equals(list.get(i).getItemType()) && (list.get(i).getExpireDate() == null ? search == null : list.get(i).getExpireDate().equals(search)))
+                    if ("Food".equals(list.get(i).getItemType()) && (list.get(i).getExpiredDate() == null ? search == null : list.get(i).getExpiredDate().equals(search)))
                     {
                         result.add(list.get(i));
                     }
@@ -252,4 +252,6 @@ class FoodManager implements ItemManager{
             Logger.getLogger(FoodManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    
 }

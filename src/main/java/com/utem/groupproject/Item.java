@@ -4,18 +4,19 @@
  */
 package com.utem.groupproject;
 
+
 /**
  *
  * @author mangy
  */
-public abstract class Item {
+public abstract class Item{
     protected String itemID;
     protected String itemType;
     private String itemName;
     private double itemPrice;
     private int itemQuantity;
     private String arrivalDate;
-    private String expireDate;
+    private String expiredDate;
 
     public Item() {
     }
@@ -40,8 +41,8 @@ public abstract class Item {
         this.arrivalDate = arrivalDate;
     }
 
-    public void setExpiredDate(String expireDate) {
-        this.expireDate = expireDate;
+    public void setExpiredDate(String expiredDate) {
+        this.expiredDate = expiredDate;
     }
 
     public String getItemID() {
@@ -68,7 +69,7 @@ public abstract class Item {
         return arrivalDate;
     }
 
-    public String getExpireDate() {
-        return expireDate;
+    public String getExpiredDate() {
+        return expiredDate;
     }
 }
